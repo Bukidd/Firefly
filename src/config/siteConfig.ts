@@ -13,7 +13,7 @@ const VERCEL_PROD_URL =
 	process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
 const SITE_URL =
 	process.env.SITE_URL ??
-	(VERCEL_PROD_URL ? `https://${VERCEL_PROD_URL}` : "https://firefly.vercel.app");
+	(VERCEL_PROD_URL ? `https://${VERCEL_PROD_URL}` : "https://firefly-ashy-five.vercel.app");
 
 // 页面开关配置 - 控制特定页面的访问权限，设为false会返回404并自动隐藏对应的导航栏菜单项
 const pages = resolvePageToggles({
