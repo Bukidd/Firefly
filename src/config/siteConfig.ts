@@ -6,6 +6,15 @@ import { resolveSiteLang } from "../utils/site-config-utils";
 // 语言代码，例如：'zh_CN', 'zh_TW', 'en', 'ja', 'ru', 'ko'。
 const SITE_LANG = resolveSiteLang("zh_CN");
 
+// 定义站点 URL（影响 canonical、RSS、Sitemap、OG 图片的绝对链接）
+// 优先级：SITE_URL 环境变量 > Vercel 注入的生产域名 > 下方默认值
+// 在 Vercel 上部署时会自动使用真实域名，无需手动维护；本地开发用默认值。
+const VERCEL_PROD_URL =
+	process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const SITE_URL =
+	process.env.SITE_URL ??
+	(VERCEL_PROD_URL ? `https://${VERCEL_PROD_URL}` : "https://firefly.vercel.app");
+
 // 页面开关配置 - 控制特定页面的访问权限，设为false会返回404并自动隐藏对应的导航栏菜单项
 const pages = resolvePageToggles({
 	// ── 社交 (Social) ──────────────────────────────────
@@ -47,8 +56,8 @@ export const siteConfig: SiteConfig = {
 	// 站点副标题
 	subtitle: "记录知识，持续输入",
 
-	// 站点 URL
-	site_url: "https://firefly.cuteleaf.cn",
+	// 站点 URL，在文件顶部 SITE_URL 定义
+	site_url: SITE_URL,
 
 	// 站点描述
 	description:
